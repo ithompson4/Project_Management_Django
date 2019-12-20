@@ -1,0 +1,93 @@
+body,
+h2,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+
+h1,
+p,
+h3 {
+    color: black;
+    margin-left: 90px;
+    margin-right: 90px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+    width: 95%;
+    background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text],
+input[type=date] {
+    width: 100%;
+    padding: 15px;
+    margin: 0px 0 25px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus,
+input[type=date]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 20px;
+}
+
+/* Set a style for the submit button */
+.createbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 8px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+}
+
+.createbtn:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+body,
+html {
+    height: 100%;
+    line-height: 1.6;
+}
+
+/* Full height image header */
+.bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("{% static 'img/background.jpeg' %}");
+    min-height: 100%;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
+}

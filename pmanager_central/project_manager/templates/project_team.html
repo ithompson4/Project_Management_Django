@@ -1,0 +1,107 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Project Team</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Main CSS file -->
+  <link href="{% static 'css/new_style.css' %}" rel="stylesheet">
+  <!-- Javascript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="https://kit.fontawesome.com/6809fcf225.js" crossorigin="anonymous"></script>
+  <style>
+      /* Full height image header */
+      .bgimg-1 {
+        background-position: center;
+        background-size: cover;
+        background-image: url("{% static 'img/background.jpeg' %}");
+        min-height: 100%;
+      }
+    </style>
+</head>
+
+<body>
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-wide"><i class="fa fa-home"></i> ProjectManager</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="{% url 'dashboard' %}" class="w3-bar-item w3-button"><i class="fa fa-list"></i> My Projects</a>
+        <a href="{% url 'project-create' %}" class="w3-bar-item w3-button"><i class="fa fa-plus"></i> Create
+          Project</a>
+        <a href="{% url 'profile' %}" class="w3-bar-item w3-button"><i class="fa fa-user"></i> My Profile</a>
+        <a href="{% url 'logout'%}?next={{request.path}}" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i>
+          Sign out</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+        onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  <!--Navbar end-->
+      <!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div style="margin-top: 65px">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      
+        <div class="col-md-4">
+          <div class="card">
+            <h4 class="card-header text-center">Project Team</h4>
+            <div class="card-body">
+              <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    {{ task_form | crispy }}
+                  </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+            
+        </div>
+      </form>
+
+    </div>
+    <!--container end.//-->
+
+    <!-- Modal -->
+    <div class="modal fade bannerformodal" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="taskModalLabel">Task Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ task_form | crispy }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+
+</html>

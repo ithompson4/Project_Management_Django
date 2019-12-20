@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Task Success</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+<!-- Favicons -->
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'lib/superfish/hoverIntent.js' %}"></script>
+  <script src="{% static 'lib/superfish/superfish.min.js' %}"></script>
+  <script src="{% static 'lib/magnific-popup/magnific-popup.min.js' %}"></script>
+  	<script src="https://kit.fontawesome.com/6809fcf225.js" crossorigin="anonymous"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body style="background: gray ">
+
+	<!--==========================
+    Header
+  ============================-->
+	<header id="header" style="background: linear-gradient(45deg, #1de099, #1dc8cd)">
+		<div class="container">
+			<div id="logo" class="pull-left">
+				<h1><a href="#intro" class="scrollto">Project Manager</a></h1>
+				<!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
+			</div>
+			<nav id="nav-menu-container">
+				<ul class="nav-menu">
+					<li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
+					{% if user.is_authenticated %}
+					{% block empty %}{% endblock%}
+					{% else %}
+					<li class="{% block register_active %}{% endblock %}"><a href="{% url 'register' %}">Register</a>
+					</li>
+					<li class="{% block login_active %}{% endblock %}"><a href="{% url 'login' %}">Log In</a></li>
+					{% endif %}
+					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+					<li><a href="{% url 'project-create' %}">Create Project</a></li>
+					{% if user.is_authenticated %}
+					<li style="position: absolute; right: 85px;"><a href="%">Welcome, {{ user.get_username }}</a></li>
+					{% csrf_token %}
+					<li style="position: absolute; right: 5px;"><a
+							href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+					{% endif %}
+				</ul>
+
+			</nav><!-- #nav-menu-container -->
+		</div>
+	</header><!-- #header -->
+{% block title %}Task Created!{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top: 110px">
+  <div class="alert alert-success">
+    <strong>New Task Created!!</strong>
+    <p>You've added successfully a new task!
+	</p>
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>

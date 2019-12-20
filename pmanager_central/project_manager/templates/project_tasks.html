@@ -1,0 +1,152 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+
+<head>
+    <title>Edit Project Tasks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6809fcf225.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS File -->
+    <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Main CSS file -->
+    <link href="{% static 'css/new_style.css' %}" rel="stylesheet">
+    <!-- Javascript Libraries -->
+    <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/dynamic-formset.js' %}"></script>
+    <style>
+        /* Full height image header */
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("{% static 'img/background.jpeg' %}");
+            min-height: 100%;
+        }
+    </style>
+    <!--Script for Adding/Remove Task Forms-->
+    <script>
+        $(function () {
+            $('#tasksForm tr').formset({
+                addText: 'Add Another Task',
+                deleteText: 'Remove Task Form', 
+                addCssClass: 'w3-button',
+                prefix: '{{ formset.prefix }}'
+            });
+        })
+    </script>
+
+    <!--End of script-->
+</head>
+
+<body>
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-card" id="myNavbar">
+            <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-wide"><i class="fa fa-home"></i>
+                ProjectManager</a>
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+                <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+                <a href="{% url 'dashboard' %}" class="w3-bar-item w3-button"><i class="fa fa-list"></i> My
+                    Projects</a>
+                <a href="{% url 'project-create' %}" class="w3-bar-item w3-button"><i class="fa fa-plus"></i> Create
+                    Project</a>
+                <a href="#profile" class="w3-bar-item w3-button"><i class="fa fa-user"></i> My Profile</a>
+                <a href="{% url 'logout'%}?next={{request.path}}" class="w3-bar-item w3-button"><i
+                        class="fa fa-sign-out"></i> Sign out</a>
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+                onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <!--Navbar end-->
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div style="margin-top: 65px">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        {% for task in tasks %}
+                        <h5 class="w3-green">{{ task.task_name}} </h5>
+                        <ul>
+                            <h5>Task Description</h5>
+                            {{ task.task_description }}
+                            <h5>Task Priority</h5>
+                            {{ task.get_task_priority_display }}
+                            <h5>Task Performer</h5>
+                            {{ task.task_performer }}
+                        </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="col-md-12 alert alert-success alert-dismissible fade show">{{ message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <h5 class="card-header w3-green">
+                        Edit Project Tasks
+                    </h5>
+                    <div class="card-body text-center" style="background-color: white">
+                        <form id="tasksForm" role="form" action="" method="POST"
+                            enctype="multipart/form-data">
+                            {{ formset.management_form }}
+                            {% csrf_token %}
+                            <table class="table" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                 {% for form in formset.forms %}
+
+                                <tr>
+                                <td>
+                                    <!-- {{ form  }} -->
+                                      <!-- {% for field in form.visible_fields %}-->
+                                       
+                                        {{ field | as_crispy_field }}
+                                     <!-- {% endfor %}-->
+                                     </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- <div class="card">
+                        <h5 class="card-header">
+                            Project Details
+                        </h5>
+                        <div class="card-body text-left">
+                            <p class="card-text">
+                                <h2>Project Name:</h2>
+                                <h3 class="card-title mt-3">{{ project.projectname }}</h3>
+                                <h5>Project Created: </h5>
+                                <p>{{ project.proj_created_at }}<p>
+                                        <h5>Project Description</h5>
+                                        <p>{{ project.projdesc }}</P>
+                                        <h5>Project Deadline</h5>
+                                        <p>{{ project.project_deadline }}</p>
+                                    </p>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <!--container end.//-->
+    </header>
+</body>
+
+</html>

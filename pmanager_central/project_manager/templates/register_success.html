@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h2,h4,h5,h6 {font-family: "Raleway", sans-serif; }
+h1,p,h3 {
+  color: black;
+  margin-left: 90px;
+  margin-right: 90px;
+}
+* {
+  box-sizing: border-box;
+}
+/* Add padding to containers */
+.container {
+  width: 95%;
+  margin-left: 55%;
+  margin-bottom: 20px;
+  background-color: white;
+}
+/* Full-width input fields */
+input[type=text], input[type=date] {
+  width: 100%;
+  padding: 15px;
+  margin: 0px 0 25px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=date]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+}
+/* Set a style for the submit button */
+.createbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 8px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+}
+.createbtn:hover {
+  opacity: 1;
+}
+/* Add a blue text color to links */
+a {
+  color: black;
+}
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+body, html {
+  height: 100%;
+  line-height: 1.6;
+}
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("{% static 'img/background.jpeg' %}");
+  min-height: 100%;
+}
+.w3-bar .w3-button {
+  padding: 16px;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+        <a href='#home' class="w3-bar-item w3-button w3-wide"><i class="fa fa-home"></i> ProjectManager</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="{% url 'dashboard' %}" class="w3-bar-item w3-button"><i class="fa fa-list"></i> My Projects</a>
+        <a href="{% url 'project-create' %}" class="w3-bar-item w3-button"><i class="fa fa-plus"></i> Create Project</a>
+        <a href="{% url 'profile' %}" class="w3-bar-item w3-button"><i class="fa fa-user"></i> My Profile</a>
+		{% csrf_token %}
+        <a href="{% url 'logout'%}?next={{request.path}}" class="w3-bar-item w3-button"><i class="fa fa-sign-out"></i> Sign out</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-row-padding w3-center w3-left-align w3-text-white" style="margin-top:64px" >
+        <div class="w3-half" style="margin-top:50px" >
+            <form action="">
+              <div class="container">
+                <h1>Registration Successful!</h1>
+
+                <hr>
+                <h3 class="w3-left-align">You've successfully registered and your account is now active!</h3><br>
+                <hr>
+                
+              </div>
+              
+            </form>
+        </div>
+  </div>
+</header>
+<script>
